@@ -1,7 +1,7 @@
 {
-  "name": "broccoli-less-single",
-  "description": "Single-file-output LESS compiler for Broccoli",
-  "version": "0.1.2",
+  "name": "broccoli-stylus-single",
+  "description": "Single-file-output Stylus compiler for Broccoli",
+  "version": "0.1.1",
   "author": {
     "name": "Gabriel Grant",
     "email": "g@briel.ca"
@@ -16,7 +16,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gabrielgrant/broccoli-less-single"
+    "url": "https://github.com/gabrielgrant/broccoli-stylus-single"
   },
   "keywords": [
     "broccoli-plugin",
@@ -29,12 +29,12 @@
     "quick-temp": "^0.1.0",
     "promise-map-series": "^0.2.0",
     "include-path-searcher": "^0.1.0",
-    "less": "~1.6.3",
+    "stylus": "~0.42.3",
     "rsvp": "~3.0.6"
   },
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/gabrielgrant/broccoli-less-single/issues"
+    "url": "https://github.com/gabrielgrant/broccoli-stylus-single/issues"
   },
-  "homepage": "https://github.com/gabrielgrant/broccoli-less-single"
+  "homepage": "https://github.com/gabrielgrant/broccoli-stylus-single"
 }

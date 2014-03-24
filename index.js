@@ -4,43 +4,39 @@ var mkdirp = require('mkdirp')
 var includePathSearcher = require('include-path-searcher')
 var quickTemp = require('quick-temp')
 var mapSeries = require('promise-map-series')
-var less = require('less')
+var stylus = require('stylus')
 var _ = require('lodash')
 var RSVP = require('rsvp');
 
-module.exports = LessCompiler
-function LessCompiler (sourceTrees, inputFile, outputFile, options) {
-  if (!(this instanceof LessCompiler)) return new LessCompiler(sourceTrees, inputFile, outputFile, options)
+module.exports = StylusCompiler
+function StylusCompiler (sourceTrees, inputFile, outputFile, options) {
+  if (!(this instanceof StylusCompiler)) return new StylusCompiler(sourceTrees, inputFile, outputFile, options)
   this.sourceTrees = sourceTrees
   this.inputFile = inputFile
   this.outputFile = outputFile
-  this.lessOptions = options || {}
+  this.stylusOptions = options || {}
 }
 
-LessCompiler.prototype.read = function (readTree) {
+StylusCompiler.prototype.read = function (readTree) {
   var self = this
   quickTemp.makeOrRemake(this, '_tmpDestDir')
   var destFile = this._tmpDestDir + '/' + this.outputFile
   mkdirp.sync(path.dirname(destFile))
   return mapSeries(this.sourceTrees, readTree)
     .then(function (includePaths) {
-      var lessOptions = {
+      var stylusOptions = {
         filename: includePathSearcher.findFileSync(self.inputFile, includePaths),
         paths: includePaths,
       }
-      _.merge(lessOptions, self.lessOptions)
-      lessOptions.paths = [path.dirname(lessOptions.filename)].concat(lessOptions.paths);
-      data = fs.readFileSync(lessOptions.filename, 'utf8');
-
-      var parser = new(less.Parser)(lessOptions);
+      _.merge(stylusOptions, self.stylusOptions)
+      stylusOptions.paths = [path.dirname(stylusOptions.filename)].concat(stylusOptions.paths);
+      data = fs.readFileSync(stylusOptions.filename, 'utf8');
 
       var promise = new RSVP.Promise(function(resolve, reject) {
-        parser.parse(data, function (e, tree) {
+        stylus.render(data, stylusOptions, function (e, css) {
           if (e) {
-            less.writeError(e, lessOptions);
             reject(e);
           }
-          var css = tree.toCSS(lessOptions);
           fs.writeFileSync(destFile, css, { encoding: 'utf8' });
 
           resolve(self._tmpDestDir);
@@ -51,7 +47,7 @@ LessCompiler.prototype.read = function (readTree) {
     });
 }
 
-LessCompiler.prototype.cleanup = function () {
+StylusCompiler.prototype.cleanup = function () {
   quickTemp.remove(this, '_tmpDestDir')
 }
 
