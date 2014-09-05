@@ -21,9 +21,9 @@ npm install --save-dev broccoli-stylus-single
 ## Usage
 
 ```js
-var compileLess = require('broccoli-stylus-single');
+var compileStylus = require('broccoli-stylus-single');
 
-var outputTree = compileLess(inputTrees, inputFile, outputFile, options)
+var outputTree = compileStylus(inputTrees, inputFile, outputFile, options)
 ```
 
 * **`inputTrees`**: An array of trees that act as the include paths for
@@ -39,5 +39,5 @@ var outputTree = compileLess(inputTrees, inputFile, outputFile, options)
 ### Example
 
 ```js
-var appCss = compileLess(sourceTrees, 'myapp/app.styl', 'assets/app.css')
+var appCss = compileStylus(sourceTrees, 'myapp/app.styl', 'assets/app.css')
 ```
