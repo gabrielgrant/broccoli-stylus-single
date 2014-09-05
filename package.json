@@ -32,6 +32,9 @@
     "stylus": "~0.42.3",
     "rsvp": "~3.0.6"
   },
+  "peerDependencies": {
+    "stylus": "*"
+  },
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/gabrielgrant/broccoli-stylus-single/issues"
