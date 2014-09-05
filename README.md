@@ -36,8 +36,22 @@ var outputTree = compileLess(inputTrees, inputFile, outputFile, options)
 
 * **`options`**: A hash of options for stylus.
 
+* **`options.module`**: Stylus module to use instead of the provided version.
+
 ### Example
 
 ```js
 var appCss = compileLess(sourceTrees, 'myapp/app.styl', 'assets/app.css')
+```
+
+### Using a specific Stylus version
+
+This plugin comes bundled with a recent version of Stylus, but you may want or need to use a specific version instead.
+
+Include `stylus` in your project's `package.json` and `require` it as the value for this plugin's `module` option.
+
+```js
+var appCss = compileLess(sourceTrees, 'myapp/app.styl', 'assets/app.css', {
+  module: require('stylus')
+});
 ```

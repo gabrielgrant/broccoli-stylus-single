@@ -15,6 +15,8 @@ function StylusCompiler (sourceTrees, inputFile, outputFile, options) {
   this.inputFile = inputFile
   this.outputFile = outputFile
   this.stylusOptions = options || {}
+  this.stylus = this.stylusOptions.module || stylus
+  delete this.stylusOptions.module
 }
 
 StylusCompiler.prototype.read = function (readTree) {
@@ -33,7 +35,7 @@ StylusCompiler.prototype.read = function (readTree) {
       data = fs.readFileSync(stylusOptions.filename, 'utf8');
 
       var promise = new RSVP.Promise(function(resolve, reject) {
-        stylus.render(data, stylusOptions, function (e, css) {
+        self.stylus.render(data, stylusOptions, function (e, css) {
           if (e) {
             reject(e);
           }
