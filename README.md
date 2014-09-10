@@ -41,3 +41,20 @@ var outputTree = compileStylus(inputTrees, inputFile, outputFile, options)
 ```js
 var appCss = compileStylus(sourceTrees, 'myapp/app.styl', 'assets/app.css')
 ```
+
+### Stylus Version
+
+This plugin uses a recent Stylus version, but can utilize a specific version of your choice. To require a specific version simply specify it in your project's `package.json` along with this plugin.
+
+In this example `package.json`, the latest pre-1.0 version of Stylus will be used instead of the version bundled with this plugin:
+
+```json
+{
+  "name": "your-project",
+  "dependencies": {
+    "broccoli-stylus-single": "0.1.2",
+    "stylus": "0.x",
+    …
+  }
+}
+```
