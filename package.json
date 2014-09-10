@@ -29,7 +29,7 @@
     "quick-temp": "^0.1.0",
     "promise-map-series": "^0.2.0",
     "include-path-searcher": "^0.1.0",
-    "stylus": "~0.42.3",
+    "stylus": "~0.47.3",
     "rsvp": "~3.0.6"
   },
   "readmeFilename": "README.md",
