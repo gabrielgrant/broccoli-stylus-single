@@ -4,9 +4,14 @@ var mkdirp = require('mkdirp')
 var includePathSearcher = require('include-path-searcher')
 var quickTemp = require('quick-temp')
 var mapSeries = require('promise-map-series')
-var stylus = require('stylus')
 var _ = require('lodash')
 var RSVP = require('rsvp');
+
+// Use the stylus module in the root project if available;
+// otherwise, use the one included with this plugin
+var codependency = require('codependency');
+var requirePeer = codependency.register(module, { index: ['peerDependencies'] });
+var stylus = requirePeer('stylus', { optional: true }) || require('stylus');
 
 module.exports = StylusCompiler
 function StylusCompiler (sourceTrees, inputFile, outputFile, options) {

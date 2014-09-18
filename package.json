@@ -24,13 +24,14 @@
     "css"
   ],
   "dependencies": {
-    "mkdirp": "^0.3.5",
-    "lodash": "~2.4.1",
-    "quick-temp": "^0.1.0",
-    "promise-map-series": "^0.2.0",
+    "codependency": "^0.1.3",
     "include-path-searcher": "^0.1.0",
-    "stylus": "~0.48.1",
-    "rsvp": "~3.0.6"
+    "lodash": "~2.4.1",
+    "mkdirp": "^0.3.5",
+    "promise-map-series": "^0.2.0",
+    "quick-temp": "^0.1.0",
+    "rsvp": "~3.0.6",
+    "stylus": "~0.48.1"
   },
   "peerDependencies": {
     "stylus": "*"
