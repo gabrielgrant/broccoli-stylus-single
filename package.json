@@ -31,7 +31,7 @@
     "promise-map-series": "^0.2.0",
     "quick-temp": "^0.1.0",
     "rsvp": "~3.0.6",
-    "stylus": "~0.48.1"
+    "stylus": "~0.49.0"
   },
   "peerDependencies": {
     "stylus": "*"
