@@ -34,7 +34,7 @@ StylusCompiler.prototype.updateCache = function (includePaths, cacheDir) {
   stylusOptions.paths = [path.dirname(stylusOptions.filename)].concat(stylusOptions.paths);
   data = fs.readFileSync(stylusOptions.filename, 'utf8');
 
-  var destFile = cacheDir + this.outputFile;
+  var destFile = path.join(cacheDir, this.outputFile);
   var promise = new RSVP.Promise(function(resolve, reject) {
     stylus.render(data, stylusOptions, function (e, css) {
       if (e) {
