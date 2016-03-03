@@ -16,25 +16,29 @@ var requirePeer = codependency.register(module, { index: ['peerDependencies'] })
 var stylus = requirePeer('stylus', { optional: true }) || require('stylus');
 
 module.exports = StylusCompiler
-function StylusCompiler (sourceTrees, inputFile, outputFile, options) {
-  if (!(this instanceof StylusCompiler)) return new StylusCompiler(sourceTrees, inputFile, outputFile, options);
-  CachingWriter.apply(this, arguments);
+function StylusCompiler (inputNodes, inputFile, outputFile, options) {
+  if (!(this instanceof StylusCompiler)) return new StylusCompiler(inputNodes, inputFile, outputFile, options);
+  CachingWriter.call(this, inputNodes, {
+    annotation: options.annotation,
+    cacheInclude: options.cacheInclude,
+    cacheExclude: options.cacheExclude
+  });
   this.inputFile = inputFile;
   this.outputFile = outputFile;
   this.stylusOptions = options || {};
 }
 
-StylusCompiler.prototype.updateCache = function (includePaths, cacheDir) {
+StylusCompiler.prototype.build = function () {
   var data;
   var stylusOptions = {
-    filename: includePathSearcher.findFileSync(this.inputFile, includePaths),
-    paths: includePaths,
+    filename: includePathSearcher.findFileSync(this.inputFile, this.inputPaths),
+    paths: this.inputPaths
   };
   _.merge(stylusOptions, this.stylusOptions);
   stylusOptions.paths = [path.dirname(stylusOptions.filename)].concat(stylusOptions.paths);
   data = fs.readFileSync(stylusOptions.filename, 'utf8');
 
-  var destFile = path.join(cacheDir, this.outputFile);
+  var destFile = path.join(this.outputPath, this.outputFile);
   var promise = new RSVP.Promise(function(resolve, reject) {
     stylus.render(data, stylusOptions, function (e, css) {
       if (e) {
