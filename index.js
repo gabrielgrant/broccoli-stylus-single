@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var includePathSearcher = require('include-path-searcher');
-var _ = require('lodash');
+var merge = require('lodash.merge');
 var RSVP = require('rsvp');
 var CachingWriter = require('broccoli-caching-writer');
 
@@ -34,7 +34,7 @@ StylusCompiler.prototype.build = function () {
     filename: includePathSearcher.findFileSync(this.inputFile, this.inputPaths),
     paths: this.inputPaths
   };
-  _.merge(stylusOptions, this.stylusOptions);
+  merge(stylusOptions, this.stylusOptions);
   stylusOptions.paths = [path.dirname(stylusOptions.filename)].concat(stylusOptions.paths);
   data = fs.readFileSync(stylusOptions.filename, 'utf8');
 
